@@ -1,4 +1,5 @@
 const { check, validationResult } = require('express-validator');
+const room = require('../models/room');
 const middleware = {
     // 방 번호는 숫자 4자리로 구분합니다.
     isRoomNumberValid: async (req, res, next) => {
@@ -34,7 +35,7 @@ const middleware = {
     // 사용자가 닉네임을 설정하고 들어갈 수 있습니다.
     // 동일한 닉네임이 방에 존재하는경우 경고를 띄웁니다.
     duplicateCheck: (req, res, next) => {
-        if(c.has({roomNumber : 'roomNumber', nickname:'nickname'})){
+        if(room.has({roomNumber : 'roomNumber', nickname:'nickname'})){
             res.json({
                 isSuccess:false,
                 meesage: '방에 이미 있는 닉네임입니다.'
