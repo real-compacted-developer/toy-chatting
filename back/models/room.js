@@ -20,7 +20,8 @@ module.exports = class Room {
     if(!this.rooms.has(roomNumber)) {
       return;
     }
-    this.rooms.get(roomNumber).set(nickname);
+    console.log("rooms.get(roomNumber) 의 타입 : ", typeof(this.rooms.get(roomNumber)));
+    this.rooms.get(roomNumber).add(nickname);
   }
 
   exit(roomNumber, nickname) {
@@ -32,5 +33,15 @@ module.exports = class Room {
 
   hasRoom(roomNumber) {
     return this.rooms.has(roomNumber);
+  }
+  
+  /**
+   * 
+   * @param {*} roomNumber 사용자가 입장하려는 방 번호
+   * @param {*} nickname 사용자 닉네임
+   * 사용자가 입장하려는 방에 같은 닉네임이 있으면 true, 없으면 false를 리턴한다.
+   */
+  hasNick(roomNumber,nickname) {
+    return this.rooms.get(roomNumber).has(nickname);
   }
 }
