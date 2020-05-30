@@ -30,4 +30,16 @@ describe('roomCreateTest', () => {
     });
   })
 
+  describe('roomExitTest', () => {
+    it('1111을 번호로 가지는 방에 user를 nickname으로 가지는 사용자가 있는지 확인한다.', () => {
+      expect(myRoom.hasNick(1111,'user')).toBe(true);
+    });
+
+    it('1111을 번호로 가지는 방에 user를 nickname으로 가지는 사용자를 제거한다.', () => {
+      myRoom.exit(1111,'user');
+    });
+    it('1111을 번호로 가지는 방에 user를 nickname으로 가지는 사용자가 있는지 확인한다.', () => {
+      expect(myRoom.hasNick(1111,'user')).toBe(false);
+    });
+  })
 });
