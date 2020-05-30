@@ -20,7 +20,6 @@ module.exports = class Room {
     if(!this.rooms.has(roomNumber)) {
       return;
     }
-    console.log("rooms.get(roomNumber) 의 타입 : ", typeof(this.rooms.get(roomNumber)));
     this.rooms.get(roomNumber).add(nickname);
   }
 
