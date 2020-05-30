@@ -5,19 +5,29 @@ let myRoom = new Room();
 //     expect(3).toBe(3);
 //   });
 
-test('roomCreateTest', () => {
+describe('roomCreateTest', () => {
 
-  expect(myRoom.hasRoom(1111)).toBe(false);
+  it('1111을 번호로 가지는 방이 있는지 확인한다.', () => {
+    expect(myRoom.hasRoom(1111)).toBe(false);
+  });
+  it('1111을 번호로 가지는 방을 추가한다.', () => {
+    myRoom.create(1111);
+  });
+  it('1111을 번호로 가지는 방이 있는지 확인한다.', () => {
+    expect(myRoom.hasRoom(1111)).toBe(true);
+  });
 
-  myRoom.create(1111);
+  describe('roomJoinTest', () => {
+    it('1111을 번호로 가지는 방에 user를 nickname으로 가지는 사용자가 있는지 확인한다.', () => {
+      expect(myRoom.hasNick(1111,'user')).toBe(false);
+    });
 
-  expect(myRoom.hasRoom(1111)).toBe(true);
+    it('1111을 번호로 가지는 방에 user를 nickname으로 가지는 사용자를 추가한다.', () => {
+      myRoom.join(1111,'user');
+    });
+    it('1111을 번호로 가지는 방에 user를 nickname으로 가지는 사용자가 있는지 확인한다.', () => {
+      expect(myRoom.hasNick(1111,'user')).toBe(true);
+    });
+  })
+
 });
-
-test('roomJoinTest', () => {  
-  myRoom.create(1111);
-  expect(myRoom.hasNick(1111,'user')).toBe(false);
-  
-  expect(myRoom.hasNick(1111,'user')).toBe(true);
-});
-
