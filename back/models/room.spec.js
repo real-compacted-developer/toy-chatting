@@ -42,4 +42,16 @@ describe('roomCreateTest', () => {
       expect(myRoom.hasNick(1111,'user')).toBe(false);
     });
   })
+
+  describe('roomDeleteTest', () => {
+    it('1111을 번호로 가지는 방이 있는지 확인한다.', () => {
+      expect(myRoom.hasRoom(1111)).toBe(true);
+    });
+    it('1111을 번호로 가지는 방을 제거한다.', () => {
+      myRoom.delete(1111);
+    });
+    it('1111을 번호로 가지는 방이 있는지 확인한다.', () => {
+      expect(myRoom.hasRoom(1111)).toBe(false);
+    });
+  })
 });
