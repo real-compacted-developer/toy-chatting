@@ -13,7 +13,8 @@ function App() {
         background={BUTTON_COLOR}
         hoverColor={BUTTON_HOVER_COLOR}
         onClick={() => console.log('test')}
-      >버튼
+      >
+        버튼
       </Button>
     </>
   );
