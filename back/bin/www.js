@@ -1,6 +1,9 @@
 const debug = require('debug')('back:server');
 const http = require('http');
+const socket = require('socket.io');
+
 const app = require('../app');
+const Socket = require('../sockets/socket');
 
 function normalizePort(val) {
   const port = parseInt(val, 10);
@@ -40,7 +43,12 @@ const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 const server = http.createServer(app);
+const io = socket.listen(server);
 
-server.listen(port);
+server.listen(port, () => {
+  Socket();
+});
 server.on('error', onError);
 server.on('listening', onListening);
+
+module.exports = io;
