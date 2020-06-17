@@ -1,36 +1,24 @@
 const debug = require('debug')('back:server');
 const http = require('http');
+const socket = require('socket.io');
+
 const app = require('../app');
+const Socket = require('../sockets/socket');
 
 function normalizePort(val) {
   const port = parseInt(val, 10);
 
-  if (Number.isNaN(port)) {
-    // named pipe
-    return val;
-  }
-
-  if (port >= 0) {
-    // port number
-    return port;
-  }
+  if (Number.isNaN(port)) return val;
+  if (port >= 0) return port;
 
   return false;
 }
 
-const port = normalizePort(process.env.PORT || '3000');
-app.set('port', port);
-
-const server = http.createServer(app);
-
 function onError(error) {
-  if (error.syscall !== 'listen') {
-    throw error;
-  }
+  if (error.syscall !== 'listen') throw error;
 
   const bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`;
 
-  // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
       console.error(`${bind} requires elevated privileges`);
@@ -51,6 +39,16 @@ function onListening() {
   debug(`Listening on ${bind}`);
 }
 
-server.listen(port);
+const port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+const server = http.createServer(app);
+const io = socket.listen(server);
+
+server.listen(port, () => {
+  Socket();
+});
 server.on('error', onError);
 server.on('listening', onListening);
+
+module.exports = io;
