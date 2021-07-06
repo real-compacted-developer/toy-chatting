@@ -1,5 +1,4 @@
 import React from 'react';
-import '../styles/App.css';
 import Button from '../atomics/Button';
 import { BUTTON_COLOR, BUTTON_HOVER_COLOR } from '../constants/color';
 
@@ -14,7 +13,8 @@ function App() {
         background={BUTTON_COLOR}
         hoverColor={BUTTON_HOVER_COLOR}
         onClick={() => console.log('test')}
-      >버튼
+      >
+        버튼
       </Button>
     </>
   );
